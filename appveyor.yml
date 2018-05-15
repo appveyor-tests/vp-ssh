@@ -6,6 +6,7 @@ init:
  - appveyor version
  - sh: echo $APPVEYOR_BUILD_WORKER_IMAGE
  - sh: echo $APPVEYOR_BUILD_WORKER_CLOUD
+ - echo "export DOTNET_CLI_TELEMETRY_OPTOUT=1" >> $HOME/.profile
  
 test_script:
 - sh: curl -sflL 'https://raw.githubusercontent.com/appveyor/ci/master/scripts/enable-ssh.sh' | bash -e -
