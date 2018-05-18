@@ -2,6 +2,9 @@ environment:
    APPVEYOR_SSH_KEY: ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABAQCUvrULRVnqephhFVqt2Gm+MRkLewIa7bfrrHTp1+Y6ulBlycVumHKsLMzeulCnxUP7+gVJ9cIQtbNBOt9oGEcSGBNGtmoDPsNOo6lA/9eVkQQR+WlgKYFK2LgtJY2FMpmkeD8BA06lz0arR6oQAac6Yjfn7HQq0XRkmJaFwrgc258JwSldbp9RNGDd7j6DzF1F3QsiLRFeHqZni6eNMnC3Xhmh0Jj4hDjYpeXWKuZjGPXAuVry0XTXPoLaUNfi0R9aDhtD8NszdzWKNwYt2iPKBVaSkMeDFkyLo3+CGLHKw//Uw8GIhtRQk4S6/Yfo7LS3leOJxJs7dryJiUS0IwT9 wasapl@appveyor.com
    APPVEYOR_SSH_BLOCK: true
 
+configuration:
+ - joppa
+ 
 init:
  - appveyor version
  - sh: echo $APPVEYOR_BUILD_WORKER_IMAGE
