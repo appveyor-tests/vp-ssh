@@ -17,4 +17,4 @@ test_script:
 build: off
 
 cache:
-- ${HOME}
+- ${APPVEYOR_BUILD_FOLDER}
