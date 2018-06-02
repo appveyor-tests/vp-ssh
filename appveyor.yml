@@ -3,7 +3,7 @@ environment:
    APPVEYOR_SSH_BLOCK: true
 
 configuration:
- - joppa
+ - joppa2
  
 init:
  - appveyor version
