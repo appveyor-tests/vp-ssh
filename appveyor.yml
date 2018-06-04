@@ -11,8 +11,12 @@ init:
  - sh: echo $APPVEYOR_BUILD_WORKER_CLOUD
  
 test_script:
-- env
-- sh: curl -sflL 'https://raw.githubusercontent.com/appveyor/ci/master/scripts/enable-ssh.sh' | bash -e -
+  - env
+  - which java && which javac && java -version
+  - echo java home is $JAVA_HOME
+  - sudo update-alternatives --config java
+  - gradle build -x spotlessCheck
+  - sh: curl -sflL 'https://raw.githubusercontent.com/appveyor/ci/master/scripts/enable-ssh.sh' | bash -e -
 
 build: off
 
