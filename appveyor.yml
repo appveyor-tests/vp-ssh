@@ -12,10 +12,6 @@ init:
  
 test_script:
   - env
-  - which java && which javac && java -version
-  - echo java home is $JAVA_HOME
-  - sudo update-alternatives --config java
-  - gradle build -x spotlessCheck
   - sh: curl -sflL 'https://raw.githubusercontent.com/appveyor/ci/master/scripts/enable-ssh.sh' | bash -e -
 
 build: off
