@@ -12,6 +12,7 @@ init:
  
 test_script:
   - env
+  - cat ${HOME}/.profile
   - sh: curl -sflL 'https://raw.githubusercontent.com/appveyor/ci/master/scripts/enable-ssh.sh' | bash -e -
 
 build: off
