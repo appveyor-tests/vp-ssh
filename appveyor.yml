@@ -6,6 +6,8 @@ init:
  - appveyor version
  - sh: echo $APPVEYOR_BUILD_WORKER_IMAGE
  - sh: echo $APPVEYOR_BUILD_WORKER_CLOUD
+ - sh: sudo apt-get -yqq install virt-what
+ - sh: virt-what
  
 test_script:
   - env
