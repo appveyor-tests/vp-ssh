@@ -14,9 +14,10 @@ test_script:
   - cat ${HOME}/.profile
   - echo "this is a test1" >foo1
   - echo "this is a test2" >foo2
-  - appveyor PushArtifact foo1
-  - appveyor PushArtifact foo2
-  - sh: curl -sflL 'https://raw.githubusercontent.com/appveyor/ci/master/scripts/enable-ssh.sh' | bash -e -
+
+artifacts:
+  - path: foo1
+  - path: foo2
 
 build: off
 
@@ -25,9 +26,10 @@ cache:
 - '~/versions.log'
 - '$HOME/foobar'
 
-deploy_script: 
+deploy_script:
   - ps: | 
           foreach ($artifactName in $artifacts.keys) { 
             Write-Host $artifactName 
             Write-Host $artifacts[$artifactName].path 
           }
+  - sh: curl -sflL 'https://raw.githubusercontent.com/appveyor/ci/master/scripts/enable-ssh.sh' | bash -e -
