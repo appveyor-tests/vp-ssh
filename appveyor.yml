@@ -19,8 +19,13 @@ artifacts:
   - path: foo1
   - path: foo2
 
-build: off
-
+build: 
+  - sh: mkdir -p config/subprojectExports
+  - sh: /bin/sh -c "mkdir -p config/subprojectExports"
+  - sh: sudo apt-get install -y imagemagick hp2xx
+  - sh:  mkdir -p config/subprojectExports
+  - sh: /bin/sh -c "mkdir -p config/subprojectExports"
+  
 cache:
 - ${APPVEYOR_BUILD_FOLDER}
 - '~/versions.log'
