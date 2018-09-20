@@ -19,7 +19,7 @@ artifacts:
   - path: foo1
   - path: foo2
 
-build_script: 
+build: 
   - sh: mkdir -p config/subprojectExports
   - sh: /bin/sh -c "mkdir -p config/subprojectExports"
   - sh: sudo apt-get install -y imagemagick hp2xx
