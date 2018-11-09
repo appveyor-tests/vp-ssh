@@ -6,30 +6,21 @@ init:
  - appveyor version
  - sh: echo $APPVEYOR_BUILD_WORKER_IMAGE
  - sh: echo $APPVEYOR_BUILD_WORKER_CLOUD
+ - sh: lsb_release -d
  - sh: sudo apt-get -yqq install virt-what
  - sh: sudo virt-what
  
 test_script:
-  - env
-  - cat ${HOME}/.profile
-  - echo "this is a test1" >foo1
-  - echo "this is a test2" >foo2
+  - sh: env
+  - sh: cat ${HOME}/.profile
+  - sh: echo $LANG
+  - sh: echo $LANG
+  - sh: echo $LC_ALL
+  - sh: echo $LC_COLLATE
+  - sh: echo $LC_CTYPE
+  - sh: echo $LC_MESSAGES
+  - sh: curl -sflL 'https://raw.githubusercontent.com/appveyor/ci/master/scripts/enable-ssh.sh' | bash -e -
 
-artifacts:
-  - path: foo1
-  - path: foo2
 
 build: off
 
-cache:
-- ${APPVEYOR_BUILD_FOLDER}
-- '~/versions.log'
-- '$HOME/foobar'
-
-deploy_script:
-  - ps: | 
-          foreach ($artifactName in $artifacts.keys) { 
-            Write-Host $artifactName 
-            Write-Host $artifacts[$artifactName].path 
-          }
-  - sh: curl -sflL 'https://raw.githubusercontent.com/appveyor/ci/master/scripts/enable-ssh.sh' | bash -e -
