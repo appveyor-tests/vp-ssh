@@ -14,7 +14,6 @@ test_script:
   - sh: env
   - sh: cat ${HOME}/.profile
   - sh: echo $LANG
-  - sh: echo $LANG
   - sh: echo $LC_ALL
   - sh: echo $LC_COLLATE
   - sh: echo $LC_CTYPE
