@@ -13,11 +13,8 @@ init:
 test_script:
   - sh: env
   - sh: cat ${HOME}/.profile
-  - sh: echo $LANG
-  - sh: echo $LC_ALL
-  - sh: echo $LC_COLLATE
-  - sh: echo $LC_CTYPE
-  - sh: echo $LC_MESSAGES
+  - sh: locale
+  - sh: locale -a
   - sh: curl -sflL 'https://raw.githubusercontent.com/appveyor/ci/master/scripts/enable-ssh.sh' | bash -e -
 
 
