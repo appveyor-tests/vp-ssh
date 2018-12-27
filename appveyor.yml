@@ -9,8 +9,11 @@ init:
  - sh: lsb_release -d
  - sh: sudo apt-get -yqq install virt-what
  - sh: sudo virt-what
+ - sh: alias clang='clang-6.0'
+ - sh: alias clang++='clang++-6.0'
  
 test_script:
+  - sh: clang --version
   - sh: env
   - sh: cat ${HOME}/.profile
   - sh: locale
