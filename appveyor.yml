@@ -7,8 +7,10 @@ init:
  - sh: echo $APPVEYOR_BUILD_WORKER_IMAGE
  - sh: echo $APPVEYOR_BUILD_WORKER_CLOUD
  - sh: lsb_release -d
- - sh: sudo apt-get -yqq install virt-what
- - sh: sudo virt-what
+ - sh: ip -o -4 a
+ - sh: |
+     sudo apt-get -yqq install virt-what &&
+     sudo virt-what
  
 test_script:
   - sh: env
