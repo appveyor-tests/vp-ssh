@@ -23,8 +23,10 @@ init:
  - sh: |
      sudo apt-get -yqq install virt-what &&
      sudo virt-what
+ - sh: export LANG=en_US.utf8
  
 test_script:
+  - ps: Get-Culture
   - sh: env
   - sh: cat ${HOME}/.profile
   - sh: locale
