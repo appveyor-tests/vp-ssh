@@ -27,6 +27,7 @@ init:
  
 test_script:
   - ps: Get-Culture
+  - sh: pwsh -c 'get-culture'
   - sh: env
   - sh: cat ${HOME}/.profile
   - sh: locale
