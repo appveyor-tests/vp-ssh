@@ -15,9 +15,8 @@ init:
  - sh: export LANG=en_US.utf8
  
 test_script:
-  - sh: unset JAVA_TOOL_OPTIONS
   - sh: cat $__APPVEYOR_DIR/env | grep TOOL
-  - sh: sed -i -e '/ JAVA_TOOL_OPTIONS=/d' $__APPVEYOR_DIR/env
+  - sh: unset JAVA_TOOL_OPTIONS; sed -i -e '/ JAVA_TOOL_OPTIONS=/d' $__APPVEYOR_DIR/env
   - sh: env
   - sh: cat ${HOME}/.profile
   - sh: locale
