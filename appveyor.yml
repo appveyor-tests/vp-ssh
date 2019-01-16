@@ -19,6 +19,7 @@ test_script:
   - sh: |
       unset JAVA_TOOL_OPTIONS
       sed -i -e '/ JAVA_TOOL_OPTIONS=/d' $__APPVEYOR_DIR/env
+      sed -i -e '/ JAVA_TOOL_OPTIONS=/d' $HOME/.profile
       cat $__APPVEYOR_DIR/env | grep JAVA_TOOL_OPTIONS || true
   - sh: env|grep JAVA_TOOL_OPTIONS || true
   - sh: cat ${HOME}/.profile
