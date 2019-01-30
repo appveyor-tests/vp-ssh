@@ -22,6 +22,7 @@ test_script:
       sed -i -e '/ JAVA_TOOL_OPTIONS=/d' $HOME/.profile
       cat $__APPVEYOR_DIR/env | grep JAVA_TOOL_OPTIONS || true
   - sh: env|grep JAVA_TOOL_OPTIONS || true
+  - sh: env
   - sh: cat ${HOME}/.profile
   - sh: locale
   - sh: locale -a
