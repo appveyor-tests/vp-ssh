@@ -26,7 +26,7 @@ test_script:
   - sh: cat ${HOME}/.profile
   - sh: locale
   - sh: locale -a
-  - sh: env|grep -E '^APPVEYOR_' > $HOME/.appveyorrc
+  - sh: export -p|grep -E ' APPVEYOR_' > $HOME/.appveyorrc
   - sh: echo "source $HOME/.appveyorrc" >> $HOME/.profile
   - sh: curl -sflL 'https://raw.githubusercontent.com/appveyor/ci/master/scripts/enable-ssh.sh' | bash -e -
 
