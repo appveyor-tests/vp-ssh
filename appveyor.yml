@@ -29,6 +29,9 @@ test_script:
   - sh: cat ${HOME}/.profile
   - sh: locale
   - sh: locale -a
+  - sh: export PGUSER=postgres
+  - sh: export PGPASSWORD=Password12!
+  - sh: echo $PWD $USER $PGUSER $PGPASSWORD
   - sh: createdb test_db_setup
   - sh: curl -sflL 'https://raw.githubusercontent.com/appveyor/ci/master/scripts/enable-ssh.sh' | bash -e -
 
