@@ -18,6 +18,7 @@ init:
  - sh: export LANG=en_US.utf8
  
 test_script:
+  - sh: echo $FOO
   - sh: cat $__APPVEYOR_DIR/env | grep JAVA_TOOL_OPTIONS || true
   - sh: |
       unset JAVA_TOOL_OPTIONS
@@ -33,5 +34,6 @@ test_script:
   - sh: curl -sflL 'https://raw.githubusercontent.com/appveyor/ci/master/scripts/enable-ssh.sh' | bash -e -
 
 
-build: off
+build_script:
+  - sh: FOO=BAR
 
