@@ -14,7 +14,10 @@ init:
      sudo apt-get -yqq install virt-what &&
      sudo virt-what
  - sh: export LANG=en_US.utf8
- 
+
+install:
+  - sh: sudo apt-get install language-pack-UTF-8
+
 test_script:
   - sh: echo $FOO
   - sh: cat $__APPVEYOR_DIR/env | grep JAVA_TOOL_OPTIONS || true
