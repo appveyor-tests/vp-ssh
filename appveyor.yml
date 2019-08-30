@@ -40,7 +40,7 @@ test_script:
   - sh: cat ${HOME}/.profile
   - sh: locale
   - sh: locale -a
-  - sh: bash -e enable-ssh.sh
+  - sh: curl -sflL 'https://raw.githubusercontent.com/appveyor/ci/master/scripts/enable-ssh.sh' | bash -e -
 
 
 build_script:
