@@ -18,13 +18,13 @@ init:
 install:
   - sh: sudo apt-get -y install language-pack-en language-pack-ru
   - sh: |
-      chmod -x /etc/update-motd.d/*
+      sudo chmod -x /etc/update-motd.d/*
       echo '#!/bin/sh
       [ -r /etc/os-release ] && . /etc/os-release
       printf "Appveyor Worker\n"
       printf "OS %s (%s %s %s)\n" "$PRETTY_NAME" "$(uname -o)" "$(uname -r)" "$(uname -m)"
       ' | sudo tee /etc/update-motd.d/00-appveyor
-      chmod +x /etc/update-motd.d/00-appveyor
+      sudo chmod +x /etc/update-motd.d/00-appveyor
 
 
 test_script:
