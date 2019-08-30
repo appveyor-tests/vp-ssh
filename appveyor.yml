@@ -16,6 +16,7 @@ init:
  - sh: export LANG=en_US.utf8
 
 install:
+  - sh: sudo apt-get install language-pack-en language-pack-fr language-pack-ru language-pack-jp
   - sh: sudo locale-gen
 
 test_script:
