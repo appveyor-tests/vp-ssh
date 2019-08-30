@@ -16,7 +16,7 @@ init:
  - sh: export LANG=en_US.utf8
 
 install:
-#  - sh: sudo apt-get install language-pack-UTF-8
+  - sh: sudo locale-gen
 
 test_script:
   - sh: echo $FOO
