@@ -8,23 +8,31 @@ init:
  - sh: echo $APPVEYOR_BUILD_WORKER_IMAGE
  - sh: echo $APPVEYOR_BUILD_WORKER_CLOUD
  - sh: pwd
- - sh: lsb_release -d
+ - sh: |
+     # Check for execution in docker container
+    if grep -Eq '/(lxc|docker)/[[:xdigit:]]{64}' /proc/1/cgroup; then
+        IS_DOCKER=true
+    else
+        IS_DOCKER=false
+    fi
+
+ - sh: if ! $IS_DOCKER; then lsb_release -d; fi
  - sh: ip -o -4 a
  - sh: |
      sudo apt-get -yqq install virt-what &&
      sudo virt-what
  - sh: export LANG=en_US.utf8
 
-install:
-  - sh: sudo apt-get -y install language-pack-en language-pack-ru
-  - sh: |
-      sudo chmod -x /etc/update-motd.d/*
-      echo '#!/bin/sh
-      [ -r /etc/os-release ] && . /etc/os-release
-      printf "Appveyor Worker\n"
-      printf "OS %s (%s %s %s)\n" "$PRETTY_NAME" "$(uname -o)" "$(uname -r)" "$(uname -m)"
-      ' | sudo tee /etc/update-motd.d/00-appveyor
-      sudo chmod +x /etc/update-motd.d/00-appveyor
+#install:
+  # - sh: sudo apt-get -y install language-pack-en language-pack-ru
+  # - sh: |
+  #     sudo chmod -x /etc/update-motd.d/*
+  #     echo '#!/bin/sh
+  #     [ -r /etc/os-release ] && . /etc/os-release
+  #     printf "Appveyor Worker\n"
+  #     printf "OS %s (%s %s %s)\n" "$PRETTY_NAME" "$(uname -o)" "$(uname -r)" "$(uname -m)"
+  #     ' | sudo tee /etc/update-motd.d/00-appveyor
+  #     sudo chmod +x /etc/update-motd.d/00-appveyor
 
 
 test_script:
