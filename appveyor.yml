@@ -9,12 +9,11 @@ init:
  - sh: echo $APPVEYOR_BUILD_WORKER_CLOUD
  - sh: pwd
  - sh: |
-     # Check for execution in docker container
-    if grep -Eq '/(lxc|docker)/[[:xdigit:]]{64}' /proc/1/cgroup; then
-        IS_DOCKER=true
-    else
-        IS_DOCKER=false
-    fi
+     if grep -Eq '/(lxc|docker)/[[:xdigit:]]{64}' /proc/1/cgroup; then
+         IS_DOCKER=true
+     else
+         IS_DOCKER=false
+     fi
 
  - sh: if ! $IS_DOCKER; then lsb_release -d; fi
  - sh: ip -o -4 a
