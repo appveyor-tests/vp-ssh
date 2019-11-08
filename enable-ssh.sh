@@ -18,16 +18,17 @@ if ! ssh-keygen -E md5 -lf /dev/stdin <<< "${APPVEYOR_SSH_KEY}" >/dev/null; then
     exit 2
 fi
 
-trap 'sudo ufw deny OpenSSH >/dev/null' EXIT SIGHUP SIGINT SIGQUIT SIGTERM ERR
+# trap 'sudo ufw deny OpenSSH >/dev/null' EXIT SIGHUP SIGINT SIGQUIT SIGTERM ERR
 
 # open 22 port for management network interface
-sudo ufw allow OpenSSH > /dev/null 2>&1
+# sudo ufw allow OpenSSH > /dev/null 2>&1
 
 # get external IP address via https://www.appveyor.com/tools/my-ip.aspx
 EXT_IP=$(curl -sf https://www.appveyor.com/tools/my-ip.aspx)
 
 # get ip address of management network interface and figure out corresponding port on NAT
-INT_IP=$(ip -o -4 addr show up primary scope global | ( read -r num dev fam addr rest; echo ${addr%/*}; ))
+#INT_IP=$(ip -o -4 addr show up primary scope global | ( read -r num dev fam addr rest; echo ${addr%/*}; ))
+INT_IP=$(ipconfig getifaddr en0)
 IFS='.' read -r -a INT_IP_ARR <<< "$INT_IP"
 PORT=$(( 22000 + (${INT_IP_ARR[2]} - 0) * 256 + ${INT_IP_ARR[3]} ))
 
