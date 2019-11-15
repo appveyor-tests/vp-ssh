@@ -51,12 +51,16 @@ test_script:
       sed -i -e '/ JAVA_TOOL_OPTIONS=/d' $HOME/.profile
       cat $__APPVEYOR_DIR/env | grep JAVA_TOOL_OPTIONS || true
   - sh: env|grep JAVA_TOOL_OPTIONS || true
-  - sh: env
+#   - sh: env
   - sh: cat ${HOME}/.profile
-  - sh: locale
-  - sh: locale -a
-  - sh: bash -ex enable-ssh.sh
-#  - sh: curl -sflL 'https://raw.githubusercontent.com/appveyor/ci/master/scripts/enable-ssh.sh' | bash -e -
+#   - sh: locale
+#   - sh: locale -a
+  - sh: |
+      if $IS_MAC; then
+        bash -ex enable-ssh.sh
+      else
+        curl -sflL 'https://raw.githubusercontent.com/appveyor/ci/master/scripts/enable-ssh.sh' | bash -e -
+      fi
 
 
 build_script:
