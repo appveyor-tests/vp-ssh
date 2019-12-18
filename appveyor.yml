@@ -10,6 +10,13 @@ init:
  - sh: echo $APPVEYOR_BUILD_WORKER_CLOUD
  - sh: pwd
  - sh: |
+        GitVersion_RELEASE=5.1.2 
+        curl -fsSL -O https://github.com/GitTools/GitVersion/releases/download/${VERSION}/gitversion-linux-${VERSION}.tar.gz
+        tar -zxf gitversion-linux-${VERSION}.tar.gz -C /usr/local/bin
+        chmod a+rx /usr/local/bin/GitVersion*
+        GitVersion /version
+
+ - sh: |
      if [ $(uname -s) = "Darwin" ]; then
          IS_MAC=true
      else
