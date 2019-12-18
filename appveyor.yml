@@ -12,8 +12,8 @@ init:
  - sh: |
         GITVERSION_RELEASE=5.1.2 
         curl -fsSL -O https://github.com/GitTools/GitVersion/releases/download/${GITVERSION_RELEASE}/gitversion-linux-${GITVERSION_RELEASE}.tar.gz
-        tar -zxf gitversion-linux-${GITVERSION_RELEASE}.tar.gz -C /usr/local/bin
-        chmod a+rx /usr/local/bin/GitVersion*
+        sudo tar -zxf gitversion-linux-${GITVERSION_RELEASE}.tar.gz -C /usr/local/bin
+        sudo chmod a+rx /usr/local/bin/GitVersion*
         GitVersion /version
 
  - sh: |
