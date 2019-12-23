@@ -31,7 +31,7 @@ init:
      fi
 
 install:
- - sh: ls -ltrRa /var/tmp/.net 
+ - sh: ls -ltrRa /var/tmp/
  - sh: |
         GITVERSION_RELEASE=5.1.2 
         curl -fsSL -O https://github.com/GitTools/GitVersion/releases/download/${GITVERSION_RELEASE}/gitversion-linux-${GITVERSION_RELEASE}.tar.gz
