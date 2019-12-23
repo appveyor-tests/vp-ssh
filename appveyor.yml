@@ -31,13 +31,13 @@ init:
      fi
 
 install:
- - sh: sudo rm -rf /var/tmp/.net/
- - sh: |
-        GITVERSION_RELEASE=5.1.2 
-        curl -fsSL -O https://github.com/GitTools/GitVersion/releases/download/${GITVERSION_RELEASE}/gitversion-linux-${GITVERSION_RELEASE}.tar.gz
-        sudo tar -zxf gitversion-linux-${GITVERSION_RELEASE}.tar.gz -C /usr/local/bin
-        sudo chmod a+rx /usr/local/bin/GitVersion*
-        GitVersion /version
+ - sh: sudo chown -R appveyor:appveyor /var/tmp/.net/
+#  - sh: |
+#         GITVERSION_RELEASE=5.1.2 
+#         curl -fsSL -O https://github.com/GitTools/GitVersion/releases/download/${GITVERSION_RELEASE}/gitversion-linux-${GITVERSION_RELEASE}.tar.gz
+#         sudo tar -zxf gitversion-linux-${GITVERSION_RELEASE}.tar.gz -C /usr/local/bin
+#         sudo chmod a+rx /usr/local/bin/GitVersion*
+#         GitVersion /version
 
 # - sh: sudo apt-get -y install language-pack-en language-pack-ru
 # - sh: |
