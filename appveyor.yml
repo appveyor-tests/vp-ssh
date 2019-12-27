@@ -32,8 +32,6 @@ init:
 
 install:
  - sh: ls -ltra /var/tmp/
- - sh: |
-    [ -d /var/tmp/.net/ ] && sudo rm -rf /var/tmp/.net/
  - sh: GitVersion /version
  
 #  - sh: |
