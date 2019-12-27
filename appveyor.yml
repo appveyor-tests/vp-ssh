@@ -31,7 +31,7 @@ init:
      fi
 
 install:
- - sh: ls -ltra /var/tmp/.net/
+ - sh: ls -ltra /var/tmp/
  - sh: GitVersion /version
  
 #  - sh: |
