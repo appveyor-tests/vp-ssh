@@ -69,11 +69,10 @@ install:
 
 
 test_script:
- - sh: |
+  - sh: |
     # test MySQL
     sudo systemctl start mysql
-    mysql -uroot -p${MYSQL_ROOT_PASSWORD} -e 'USE mysql; SELECT Host,User FROM `user`;' ||
-        { echo "[ERROR] Cannot connect to MySQL locally." 1>&2; return 20;}
+    mysql -uroot -p${MYSQL_ROOT_PASSWORD} -e 'USE mysql; SELECT Host,User FROM `user`;'
     sudo systemctl disable mysql
     dpkg -l 'mysql-*'|grep '^ii'
     
