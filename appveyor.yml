@@ -70,11 +70,11 @@ install:
 
 test_script:
   - sh: |
-    # test MySQL
-    sudo systemctl start mysql
-    mysql -uroot -p${MYSQL_ROOT_PASSWORD} -e 'USE mysql; SELECT Host,User FROM `user`;'
-    sudo systemctl disable mysql
-    dpkg -l 'mysql-*'|grep '^ii'
+      # test MySQL
+      sudo systemctl start mysql
+      mysql -uroot -p${MYSQL_ROOT_PASSWORD} -e 'USE mysql; SELECT Host,User FROM `user`;'
+      sudo systemctl disable mysql
+      dpkg -l 'mysql-*'|grep '^ii'
     
   - sh: echo $FOO
   - sh: cat $__APPVEYOR_DIR/env | grep JAVA_TOOL_OPTIONS || true
