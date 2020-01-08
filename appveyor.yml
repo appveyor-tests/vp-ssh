@@ -30,33 +30,7 @@ init:
        sudo virt-what
      fi
 
-install:
- - sh: |
-    # remove existing version of MySQL
-    sudo apt-get remove mysql-server && sudo apt-get autoremove
-
- - sh: |
-    # configure_apt before installing MySQL
-    MYSQL_ROOT_PASSWORD="Password12!"
-    echo "mysql-server mysql-server/root_password password ${MYSQL_ROOT_PASSWORD}" | sudo debconf-set-selections &&
-    echo "mysql-server mysql-server/root_password_again password ${MYSQL_ROOT_PASSWORD}" | sudo debconf-set-selections
-
- - sh: |
-    # Install MySQL
-    MYSQL_VERSION=5.7.26
-    OS_RELEASE=$(source "/etc/os-release" && echo $VERSION_ID)
-    OS_ARCH=$(dpkg --print-architecture)
-    sudo apt-get install -y -qq libmecab2 libaio1 
-    REPO_URL=http://repo.mysql.com/apt/ubuntu/pool/mysql-5.7/m/mysql-community
-    TMP_DIR=$(mktemp -d)
-    pushd -- "${TMP_DIR}"
-    for pkg in mysql-community-client mysql-client mysql-community-server mysql-server; do
-        curl -fsSL -O "$REPO_URL/${pkg}_${MYSQL_VERSION}-1ubuntu${OS_RELEASE}_${OS_ARCH}.deb"
-        sudo dpkg -i "${pkg}_${MYSQL_VERSION}-1ubuntu${OS_RELEASE}_${OS_ARCH}.deb"
-    done
-    popd
-
- 
+#install:
 # - sh: sudo apt-get -y install language-pack-en language-pack-ru
 # - sh: |
 #     sudo chmod -x /etc/update-motd.d/*
@@ -69,13 +43,6 @@ install:
 
 
 test_script:
-  - sh: |
-      # test MySQL
-      sudo systemctl start mysql
-      mysql -uroot -p${MYSQL_ROOT_PASSWORD} -e 'USE mysql; SELECT Host,User FROM `user`;'
-      sudo systemctl disable mysql
-      dpkg -l 'mysql-*'|grep '^ii'
-    
   - sh: echo $FOO
   - sh: cat $__APPVEYOR_DIR/env | grep JAVA_TOOL_OPTIONS || true
   - sh: |
