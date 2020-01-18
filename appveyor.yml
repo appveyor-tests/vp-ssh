@@ -43,13 +43,6 @@ init:
 
 
 test_script:
-  - sh: |
-      if [ "$PLATFORM" = "x64" ]; then
-        sudo apt-get update &&
-        sudo apt-get install -y libglew-dev libegl1-mesa-dev libgles2-mesa-dev libpugixml-dev libopenal-dev libtbb-dev libcrypto++-dev liblockfile-dev libfreeimage-dev libfreeimageplus-dev &&
-        sudo apt-get install -y cmake liblua5.1-0-dev libssl-dev libogg-dev libtheora-dev libvorbis-dev liblzo2-dev libjpeg-dev libncurses5-dev libsdl2-dev &&
-        CFLAGS="-w" CXXFLAGS="-w" cmake .. -DCMAKE_BUILD_TYPE=$BUILD_CONFIGURATION
-      fi
   - sh: echo $FOO
   - sh: cat $__APPVEYOR_DIR/env | grep JAVA_TOOL_OPTIONS || true
   - sh: |
