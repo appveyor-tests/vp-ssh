@@ -41,7 +41,7 @@ init:
 #     ' | sudo tee /etc/update-motd.d/00-appveyor
 #     sudo chmod +x /etc/update-motd.d/00-appveyor
 install:
-  - sh: apt-get install ninja-build
+  - sh: sudo apt-get install ninja-build
 
 test_script:
   - sh: echo $FOO
