@@ -40,8 +40,6 @@ init:
 #     printf "OS %s (%s %s %s)\n" "$PRETTY_NAME" "$(uname -o)" "$(uname -r)" "$(uname -m)"
 #     ' | sudo tee /etc/update-motd.d/00-appveyor
 #     sudo chmod +x /etc/update-motd.d/00-appveyor
-install:
-  - sh: sudo apt-get install ninja-build
 
 test_script:
   - sh: echo $FOO
