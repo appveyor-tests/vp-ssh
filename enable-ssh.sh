@@ -30,7 +30,7 @@ EXT_IP=$(curl -sf https://www.appveyor.com/tools/my-ip.aspx)
 #INT_IP=$(ip -o -4 addr show up primary scope global | ( read -r num dev fam addr rest; echo ${addr%/*}; ))
 INT_IP=$(ipconfig getifaddr en0)
 IFS='.' read -r -a INT_IP_ARR <<< "$INT_IP"
-PORT=$(( 22000 + (${INT_IP_ARR[2]} - 0) * 256 + ${INT_IP_ARR[3]} ))
+PORT=$(( 22000 + INT_IP_ARR[3] ))
 
 # add ssh key (if set) to authorized_keys
 mkdir -p ${HOME}/.ssh
