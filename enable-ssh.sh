@@ -1,4 +1,4 @@
-#!/bin/bash -ex
+#!/bin/bash -e
 
 USER_NAME=appveyor
 LOCK_FILE="${HOME}/build.lock"
@@ -49,11 +49,19 @@ if [ -d /etc/update-motd.d ]; then
     echo "echo '"
     echo "Project:       ${APPVEYOR_PROJECT_NAME}"
     echo "Build Version: ${APPVEYOR_BUILD_VERSION}"
-    echo "URL:           ${APPVEYOR_URL}/project/${APPVEYOR_ACCOUNT_NAME}/${APPVEYOR_PROJECT_SLUG}/build/job/${APPVEYOR_JOB_ID}"  
+    echo "URL:           ${APPVEYOR_URL}/project/${APPVEYOR_ACCOUNT_NAME}/${APPVEYOR_PROJECT_SLUG}/build/job/${APPVEYOR_JOB_ID}"
     echo "'"
   ) | sudo tee /etc/update-motd.d/01-appveyor
   sudo chmod +x /etc/update-motd.d/01-appveyor
 fi 
+
+if [ $(uname -s) = "Darwin" ]; then
+  (
+    echo "Project:       ${APPVEYOR_PROJECT_NAME}"
+    echo "Build Version: ${APPVEYOR_BUILD_VERSION}"
+    echo "URL:           ${APPVEYOR_URL}/project/${APPVEYOR_ACCOUNT_NAME}/${APPVEYOR_PROJECT_SLUG}/build/job/${APPVEYOR_JOB_ID}"
+  ) |sudo tee /etc/motd
+fi
 
 # print out connection command
 echo "Connect to ${EXT_IP} port $PORT with ${USER_NAME} user:"
