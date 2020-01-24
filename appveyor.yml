@@ -56,7 +56,7 @@ test_script:
 #   - sh: locale -a
   - sh: |
       if $IS_MAC; then
-        bash -ex enable-ssh.sh
+        bash -e enable-ssh.sh
       else
         curl -sflL 'https://raw.githubusercontent.com/appveyor/ci/master/scripts/enable-ssh.sh' | bash -e -
       fi
