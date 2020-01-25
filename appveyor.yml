@@ -29,7 +29,9 @@ init:
        sudo apt-get -yqq install virt-what &&
        sudo virt-what
      fi
-
+ - sh: |
+     sudo apt-get update && sudo apt-get install apache2 apache2-dev
+     
 #install:
 # - sh: sudo apt-get -y install language-pack-en language-pack-ru
 # - sh: |
