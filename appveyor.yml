@@ -30,7 +30,7 @@ init:
        sudo virt-what
      fi
  - sh: |
-     #sudo apt-get -y update || true
+     sudo apt-get -y upddate || true
      sudo apt-get -y install apache2 apache2-dev
      
 #install:
