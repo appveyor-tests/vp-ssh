@@ -30,7 +30,8 @@ init:
        sudo virt-what
      fi
  - sh: |
-     sudo apt-get -y update && sudo apt-get -y install apache2 apache2-dev
+     #sudo apt-get -y update || true
+     sudo apt-get -y install apache2 apache2-dev
      
 #install:
 # - sh: sudo apt-get -y install language-pack-en language-pack-ru
