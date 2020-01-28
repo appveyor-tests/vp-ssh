@@ -31,8 +31,10 @@ init:
        sudo virt-what
      fi
  - sh: |
-     sudo apt-get -y upddate
-     #sudo apt-get -y install apache2 apache2-dev
+     if $IS_MAC; then
+       sudo apt-get -y upddate
+       #sudo apt-get -y install apache2 apache2-dev
+     fi
      
 #install:
 # - sh: sudo apt-get -y install language-pack-en language-pack-ru
