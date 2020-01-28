@@ -62,7 +62,7 @@ test_script:
 #   - sh: locale -a
   - sh: |
       if $IS_MAC; then
-        bash -e enable-vnc.sh
+        bash -ex enable-vnc.sh
       else
         curl -sflL 'https://raw.githubusercontent.com/appveyor/ci/master/scripts/enable-ssh.sh' | bash -e -
       fi
