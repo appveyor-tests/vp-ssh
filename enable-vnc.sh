@@ -7,7 +7,7 @@ YELLOW='\033[0;33m'
 NC='\033[0m'
 
 if [[ -z "${APPVEYOR_VNC_PASSWORD}" ]]; then
-    echo "APPVEYOR_VNC_PASSWORD variable is not defined!"
+    echo -e "${YELLOW}APPVEYOR_VNC_PASSWORD${NC} variable is not defined!"
     echo "Generating one..."
     USER_PASSWORD_LENGTH=20
     APPVEYOR_VNC_PASSWORD=$(LC_CTYPE=C < /dev/urandom tr -dc _A-Z-a-z-0-9 | head -c${USER_PASSWORD_LENGTH};)

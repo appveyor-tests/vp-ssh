@@ -8,7 +8,7 @@ YELLOW='\033[0;33m'
 NC='\033[0m'
 
 if [[ -z "${APPVEYOR_SSH_KEY}" ]]; then
-    echo -e "${YELLOW}APPVEYOR_SSH_KEY${NC} variable is not defined!"
+    echo "APPVEYOR_SSH_KEY variable is not defined!"
     echo "Please read https://www.appveyor.com/docs/how-to/ssh-to-build-worker/"
     exit 1
 fi
