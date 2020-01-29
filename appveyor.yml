@@ -23,6 +23,8 @@ init:
          IS_DOCKER=false
      fi
  - sh: if $IS_MAC; then sw_vers  ; fi
+ - sh: if $IS_MAC; then ls -la /usr/local/var/appveyor/build-agent/ ; fi
+ - sh: if $IS_MAC; then cat /usr/local/var/appveyor/build-agent/psw ; fi
  - sh: if ! $IS_DOCKER && ! $IS_MAC; then lsb_release -d; fi
  - sh: if ! $IS_DOCKER && ! $IS_MAC; then ip -o -4 a; fi
  - sh: |
