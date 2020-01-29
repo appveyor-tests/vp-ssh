@@ -2,27 +2,26 @@
 
 USER_NAME=appveyor
 LOCK_FILE="${HOME}/Desktop/Delete me to continue build.txt"
+PSW_FILE=/usr/local/var/appveyor/build-agent/psw
 
 YELLOW='\033[0;33m'
 NC='\033[0m'
 
-if [[ -z "${APPVEYOR_VNC_PASSWORD}" ]]; then
-    echo -e "${YELLOW}APPVEYOR_VNC_PASSWORD${NC} variable is not defined!"
-    echo "Generating one..."
-    USER_PASSWORD_LENGTH=20
-    APPVEYOR_VNC_PASSWORD=$(head -c200 /dev/urandom | LC_CTYPE=C tr -dc _A-Z-a-z-0-9 | head -c${USER_PASSWORD_LENGTH};)
-    echo -e "Password set to ${YELLOW}'${APPVEYOR_VNC_PASSWORD}'${NC}"
+if [ -f "$PSW_FILE" ]; then
+    CURRENT=$(cat "$PSW_FILE")
+else
+    echo "Password file not found!"
+    exit 1
 fi
 
-/usr/bin/dscl -u "$USER_NAME" -P "appveyor" . -passwd "/Users/$USER_NAME" "$APPVEYOR_VNC_PASSWORD" &&
-security set-keychain-password -o appveyor -p "$APPVEYOR_VNC_PASSWORD" "/Users/$USER_NAME/Library/Keychains/login.keychain" ||
-    { echo "Failed to change user's password! Aborting" ; exit 1; }
-
-
-# trap 'sudo ufw deny OpenSSH >/dev/null' EXIT SIGHUP SIGINT SIGQUIT SIGTERM ERR
-
-# open 5900 port for management network interface
-# sudo ufw allow OpenSSH > /dev/null 2>&1
+if [[ -z "${APPVEYOR_VNC_PASSWORD-}" || "${#APPVEYOR_VNC_PASSWORD}" = "0" ]]; then
+    echo -e "${YELLOW}APPVEYOR_VNC_PASSWORD${NC} variable is not defined!"
+    echo -e "Password set to ${YELLOW}'${CURRENT}'${NC}"
+else
+    /usr/bin/dscl -u "$USER_NAME" -P "$CURRENT" . -passwd "/Users/$USER_NAME" "$APPVEYOR_VNC_PASSWORD" &&
+    security set-keychain-password -o "$CURRENT" -p "$APPVEYOR_VNC_PASSWORD" "/Users/$USER_NAME/Library/Keychains/login.keychain" ||
+        { echo "Failed to change user's password! Aborting" ; exit 1; }
+fi
 
 # get external IP address via https://www.appveyor.com/tools/my-ip.aspx
 EXT_IP=$(curl -sf https://www.appveyor.com/tools/my-ip.aspx)
@@ -35,7 +34,7 @@ PORT=$(( 59000 + INT_IP_ARR[3] ))
 
 # print out connection command
 echo "Connect to ${EXT_IP} port $PORT with ${USER_NAME} user:"
-echo -e "${YELLOW}    vnc ${USER_NAME}@${EXT_IP} -p ${PORT}${NC}"
+echo -e "${YELLOW}    vnc://${USER_NAME}:<password>@${EXT_IP}:${PORT}${NC}"
 if [[ -n "${USERKEY_MD5}" ]]; then
     echo ""
     echo "RSA key fingerprint:"
