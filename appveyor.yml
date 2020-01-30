@@ -5,11 +5,12 @@ environment:
 #   APPVEYOR_VNC_BLOCK: true
 
 init:
-# - appveyor version
+
  - sh: echo $PATH| tr ":" '\n'
  - sh: cat $HOME/.profile
  - sh: cat /etc/profile
- - sh: ps eww
+ - sh: ps aeww || true
+ - appveyor version
  - ps: Update-AppveyorBuild -Message "Image '$env:APPVEYOR_BUILD_WORKER_IMAGE'@'$env:APPVEYOR_BUILD_WORKER_CLOUD' cloud. $env:APPVEYOR_REPO_COMMIT_MESSAGE"
  - sh: echo $APPVEYOR_BUILD_WORKER_IMAGE
  - sh: echo $APPVEYOR_BUILD_WORKER_CLOUD
