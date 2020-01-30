@@ -6,6 +6,7 @@ environment:
 
 init:
 # - appveyor version
+ - sh: echo $PATH
  - ps: Update-AppveyorBuild -Message "Image '$env:APPVEYOR_BUILD_WORKER_IMAGE'@'$env:APPVEYOR_BUILD_WORKER_CLOUD' cloud. $env:APPVEYOR_REPO_COMMIT_MESSAGE"
  - sh: echo $APPVEYOR_BUILD_WORKER_IMAGE
  - sh: echo $APPVEYOR_BUILD_WORKER_CLOUD
