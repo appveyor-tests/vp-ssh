@@ -9,7 +9,7 @@ init:
  - sh: echo $PATH| tr ":" '\n'
  - sh: cat $HOME/.profile
  - sh: cat /etc/profile
- - sh: ps aeww || true
+ - sh: ps auxe | tr ":" '\n' || true
  - appveyor version
  - ps: Update-AppveyorBuild -Message "Image '$env:APPVEYOR_BUILD_WORKER_IMAGE'@'$env:APPVEYOR_BUILD_WORKER_CLOUD' cloud. $env:APPVEYOR_REPO_COMMIT_MESSAGE"
  - sh: echo $APPVEYOR_BUILD_WORKER_IMAGE
