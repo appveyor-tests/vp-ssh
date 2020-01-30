@@ -6,7 +6,7 @@ environment:
 
 init:
 # - appveyor version
- - sh: echo $PATH
+ - sh: echo $PATH| tr ":" '\n'
  - sh: cat $HOME/.profile
  - sh: cat /etc/profile
  - sh: ps eww
