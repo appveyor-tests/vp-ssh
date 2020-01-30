@@ -11,7 +11,8 @@ if [ -f "$PSW_FILE" ]; then
     CURRENT=$(cat "$PSW_FILE")
 else
     echo "Password file not found!"
-    exit 1
+    CURRENT=appveyor
+    # exit 1
 fi
 
 if [[ -z "${APPVEYOR_VNC_PASSWORD-}" || "${#APPVEYOR_VNC_PASSWORD}" = "0" ]]; then
