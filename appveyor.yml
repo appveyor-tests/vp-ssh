@@ -39,7 +39,7 @@ init:
      fi
  - sh: |
      if ! $IS_MAC; then
-       sudo apt-get -y upddate
+       sudo apt-get -y update
        #sudo apt-get -y install apache2 apache2-dev
      fi
      
