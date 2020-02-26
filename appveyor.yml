@@ -6,10 +6,6 @@ environment:
 
 init:
 
- - sh: echo $PATH| tr ":" '\n'
- - sh: cat $HOME/.profile
- - sh: cat /etc/profile
- - sh: ps auxe | tr ":" '\n' || true
  - appveyor version
  - ps: Update-AppveyorBuild -Message "Image '$env:APPVEYOR_BUILD_WORKER_IMAGE'@'$env:APPVEYOR_BUILD_WORKER_CLOUD' cloud. $env:APPVEYOR_REPO_COMMIT_MESSAGE"
  - sh: echo $APPVEYOR_BUILD_WORKER_IMAGE
@@ -45,31 +41,15 @@ init:
      
 #install:
 # - sh: sudo apt-get -y install language-pack-en language-pack-ru
-# - sh: |
-#     sudo chmod -x /etc/update-motd.d/*
-#     echo '#!/bin/sh
-#     [ -r /etc/os-release ] && . /etc/os-release
-#     printf "Appveyor Worker\n"
-#     printf "OS %s (%s %s %s)\n" "$PRETTY_NAME" "$(uname -o)" "$(uname -r)" "$(uname -m)"
-#     ' | sudo tee /etc/update-motd.d/00-appveyor
-#     sudo chmod +x /etc/update-motd.d/00-appveyor
 
 test_script:
   - sh: echo $FOO
   - sh: cat $__APPVEYOR_DIR/env | grep JAVA_TOOL_OPTIONS || true
   - sh: |
-      unset JAVA_TOOL_OPTIONS
-      sed -i -e '/ JAVA_TOOL_OPTIONS=/d' $__APPVEYOR_DIR/env
-      sed -i -e '/ JAVA_TOOL_OPTIONS=/d' $HOME/.profile
-      cat $__APPVEYOR_DIR/env | grep JAVA_TOOL_OPTIONS || true
-  - sh: env|grep JAVA_TOOL_OPTIONS || true
-#   - sh: env
   - sh: cat ${HOME}/.profile
-#   - sh: locale
-#   - sh: locale -a
   - sh: |
       if $IS_MAC; then
-        bash -ex enable-vnc.sh
+        bash -e enable-vnc.sh
       else
         curl -sflL 'https://raw.githubusercontent.com/appveyor/ci/master/scripts/enable-ssh.sh' | bash -e -
       fi
