@@ -18,7 +18,7 @@ if ! ssh-keygen -E md5 -lf /dev/stdin <<< "${APPVEYOR_SSH_KEY}" >/dev/null; then
     exit 2
 fi
 
-if [ "$PLATFORM" = "Linux" ] && command -v ufw; then
+if [ "$PLATFORM" = "Linux" ] && command -v ufw >/dev/null; then
     trap 'sudo ufw deny OpenSSH >/dev/null' EXIT SIGHUP SIGINT SIGQUIT SIGTERM ERR
 
     # open 22 port for management network interface
@@ -69,7 +69,7 @@ if [ "$PLATFORM" = "Darwin" ]; then
     echo "Project:       ${APPVEYOR_PROJECT_NAME}"
     echo "Build Version: ${APPVEYOR_BUILD_VERSION}"
     echo "URL:           ${APPVEYOR_URL}/project/${APPVEYOR_ACCOUNT_NAME}/${APPVEYOR_PROJECT_SLUG}/build/job/${APPVEYOR_JOB_ID}"
-  ) |sudo tee /etc/motd
+  ) |sudo tee /etc/motd >/dev/null
 fi
 
 # print out connection command
