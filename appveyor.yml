@@ -35,7 +35,7 @@ init:
      fi
  - sh: |
      if ! $IS_MAC; then
-       sudo apt-get -y update
+       #sudo apt-get -y update
        #sudo apt-get -y install apache2 apache2-dev
      fi
      
@@ -47,12 +47,13 @@ test_script:
   - sh: cat $__APPVEYOR_DIR/env | grep JAVA_TOOL_OPTIONS || true
   - sh: |
   - sh: cat ${HOME}/.profile
-  - sh: |
-      if $IS_MAC; then
-        bash -e enable-ssh.sh
-      else
-        curl -sflL 'https://raw.githubusercontent.com/appveyor/ci/master/scripts/enable-ssh.sh' | bash -e -
-      fi
+  - sh: bash -e enable-ssh.sh
+  # - sh: |
+  #     if $IS_MAC; then
+  #       bash -e enable-ssh.sh
+  #     else
+  #       curl -sflL 'https://raw.githubusercontent.com/appveyor/ci/master/scripts/enable-ssh.sh' | bash -e -
+  #     fi
 
 
 build_script:
